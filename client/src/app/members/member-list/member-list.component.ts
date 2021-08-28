@@ -14,7 +14,7 @@ import { MembersService } from 'src/app/_services/members.service';
   styleUrls: ['./member-list.component.css']
 })
 export class MemberListComponent implements OnInit {
-  members: Member[] | null=[];
+  members!: Member[] | null;
   pagination!: Pagination;
  userParams!: UserParams;
  user!: User | null;

@@ -38,11 +38,17 @@ export class AccountService {
     )
   }
   setCurrentUser(user:User){
+    user.roles = [];
+    const roles = this.getDecodedtoken(user.token).role;
+    Array.isArray(roles) ? user.roles =roles:user.roles.push(roles);
     localStorage.setItem('user',JSON.stringify(user));
     this.currentUserSource.next(user);
   }
   logout(){
     localStorage.removeItem('user');
     this.currentUserSource.next(null);
+  }
+  getDecodedtoken(token:any) {
+    return JSON.parse(atob(token.split('.')[1]));
   }
 }
